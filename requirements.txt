@@ -1,0 +1,8 @@
+# AI Interview Coach — Python dependencies
+# Install with: pip install -r requirements.txt
+
+streamlit>=1.34.0      # Frontend UI framework
+ollama>=0.2.0          # Python client for the local Ollama LLM runtime
+pandas>=2.0.0          # Used for lightweight data shaping in the UI/report
+
+# Note: sqlite3 is part of the Python standard library and needs no install.
