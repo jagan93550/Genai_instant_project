@@ -221,11 +221,3 @@ A: SQLite is file-based and needs no separate server process, which is ideal for
 **Q7. How does the follow-up question mechanism work?**
 A: After scoring an answer, if `technical_score` is below `FOLLOW_UP_SCORE_THRESHOLD` (configurable in `config.py`) and the follow-up limit per question hasn't been used, `interview_engine._decide_next_action()` returns `"follow_up"`, and `generate_follow_up()` asks the LLM for one targeted question probing the specific weak answer.
 
-**Q8. How would you add voice support, since it's listed as a future enhancement?**
-A: The chat input already produces plain text that's passed to `engine.submit_answer(answer)`. Voice support only requires inserting a speech-to-text step (e.g., Whisper) before that call — no backend changes needed, which is precisely why the UI/backend separation matters.
-
-**Q9. What design pattern does `InterviewEngine` follow?**
-A: It acts as a **Facade/Orchestrator** — it hides the complexity of coordinating the database, LLM client, evaluator, and question bank behind a small, simple interface (`start()`, `get_next_question()`, `submit_answer()`, `finish()`) that the UI consumes.
-
-**Q10. How is prompt engineering used in this project?**
-A: `prompts/system_prompt.py` defines distinct system personas for the "Interviewer" and "Evaluator" roles, with explicit output-format constraints (strict JSON schema for evaluation) to make LLM output machine-parseable and consistent — a core prompt engineering technique for building reliable LLM-backed applications.
